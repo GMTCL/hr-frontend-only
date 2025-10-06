@@ -3,7 +3,6 @@ const nextConfig = {
   // Static export configuration for Vercel
   output: 'export',
   trailingSlash: true,
-  distDir: 'out',
   
   // Disable middleware for static export
   experimental: {
