@@ -8,7 +8,6 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 .next
-out
 dist
 *.tsbuildinfo
 .DS_Store
@@ -18,4 +17,3 @@ dist
 *.swp
 *.swo
 *~
-
