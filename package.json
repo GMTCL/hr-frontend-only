@@ -1,0 +1,46 @@
+{
+  "name": "hr-management-system",
+  "version": "1.0.0",
+  "description": "HR Management System with Thai-English support",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "next dev",
+    "build": "next build",
+    "start:pm2": "pm2 start ecosystem.config.js",
+    "stop:pm2": "pm2 stop hr-management-frontend",
+    "restart:pm2": "pm2 restart hr-management-frontend",
+    "logs:pm2": "pm2 logs hr-management-frontend",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "next": "^15.5.4",
+    "next-intl": "^3.0.0-beta.19",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "pm2": "^5.3.0",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "typescript": "^5.3.0",
+    "@types/react": "^18.2.0",
+    "@types/node": "^20.10.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "hr",
+    "management",
+    "system",
+    "thai",
+    "english",
+    "nextjs",
+    "express"
+  ],
+  "author": "HR Management Team",
+  "license": "MIT"
+}

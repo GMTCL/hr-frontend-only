@@ -1,0 +1,14 @@
+# Redirects for static hosting
+# Redirect root to Thai locale
+/ /th/ 301
+
+# Redirect English routes
+/en /en/ 301
+/en/* /en/:splat 301
+
+# Redirect Thai routes  
+/th /th/ 301
+/th/* /th/:splat 301
+
+# Handle 404s - redirect to Thai home
+/* /th/ 404

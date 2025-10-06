@@ -1,0 +1,338 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+
+export default function HomePage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check login status
+    const loginStatus = localStorage.getItem('isLoggedIn');
+    setIsLoggedIn(loginStatus === 'true');
+  }, []);
+
+  const modules = [
+    {
+      title: 'การจัดการพนักงาน',
+      description: 'จัดการข้อมูลพนักงาน, ประวัติการทำงาน และข้อมูลส่วนตัว',
+      href: '/th/employees',
+      category: 'core',
+      gradient: 'from-blue-500 to-cyan-500'
+    },
+    {
+      title: 'ระบบลาป่วย/ลาพักร้อน',
+      description: 'จัดการใบลา, อนุมัติการลา และติดตามวันลา',
+      href: '/th/leaves',
+      category: 'hr',
+      gradient: 'from-green-500 to-emerald-500'
+    },
+    {
+      title: 'การเข้างาน/ลงเวลา',
+      description: 'ติดตามเวลาเข้างาน, การมาสาย และสถิติการเข้างาน',
+      href: '/th/attendance',
+      category: 'core',
+      gradient: 'from-purple-500 to-violet-500'
+    },
+    {
+      title: 'การจ่ายเงินเดือน',
+      description: 'คำนวณเงินเดือน, ภาษี และสวัสดิการ',
+      href: '/th/payroll',
+      category: 'finance',
+      gradient: 'from-orange-500 to-red-500'
+    },
+    {
+      title: 'การประเมินผล',
+      description: 'ประเมินผลการปฏิบัติงาน KPI และเป้าหมาย',
+      href: '/th/performance',
+      category: 'hr',
+      gradient: 'from-pink-500 to-rose-500'
+    },
+    {
+      title: 'การอบรม',
+      description: 'จัดการหลักสูตรอบรม, การลงทะเบียน และผลการอบรม',
+      href: '/th/training',
+      category: 'development',
+      gradient: 'from-indigo-500 to-blue-500'
+    },
+    {
+      title: 'สวัสดิการ',
+      description: 'จัดการสิทธิประโยชน์ประกันสังคม และสวัสดิการ',
+      href: '/th/benefits',
+      category: 'hr',
+      gradient: 'from-teal-500 to-cyan-500'
+    },
+    {
+      title: 'การรับสมัครงาน',
+      description: 'ประกาศรับสมัคร, คัดเลือก และบรรจุพนักงาน',
+      href: '/th/recruitment',
+      category: 'hr',
+      gradient: 'from-yellow-500 to-orange-500'
+    },
+    {
+      title: 'รายงานและสถิติ',
+      description: 'รายงานข้อมูล HR, สถิติ และการวิเคราะห์',
+      href: '/th/reports',
+      category: 'analytics',
+      gradient: 'from-gray-500 to-slate-500'
+    },
+    {
+      title: 'ระบบสแกนใบหน้า',
+      description: 'เช็คชื่อเข้าออกด้วยเทคโนโลยี Facial Recognition',
+      href: '/th/facial-attendance',
+      category: 'core',
+      gradient: 'from-purple-500 to-pink-500'
+    },
+    {
+      title: 'จัดการการเข้างาน - HR',
+      description: 'ระบบติดตามและจัดการการเข้างานของพนักงาน',
+      href: '/th/hr-attendance-management',
+      category: 'hr',
+      gradient: 'from-indigo-500 to-blue-500'
+    },
+    {
+      title: 'ตั้งค่าระบบการเข้างาน',
+      description: 'กำหนดการตั้งค่าสำหรับระบบสแกนใบหน้าและเช็คชื่อ',
+      href: '/th/attendance-settings',
+      category: 'hr',
+      gradient: 'from-teal-500 to-cyan-500'
+    }
+  ];
+
+  const stats = [
+    { name: 'พนักงานทั้งหมด', value: '2,847', description: 'บุคลากรในองค์กร' },
+    { name: 'หน่วยงาน', value: '18', description: 'แผนกต่างๆ' },
+    { name: 'ตำแหน่งงาน', value: '156', description: 'ตำแหน่งทั้งหมด' },
+    { name: 'อัตราการเข้างาน', value: '95.8%', description: 'เฉลี่ยรายเดือน' }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-400 to-indigo-600 rounded-full opacity-10 blur-3xl animate-pulse"></div>
+        <div className="absolute top-40 -left-40 w-80 h-80 bg-gradient-to-r from-purple-400 to-pink-600 rounded-full opacity-10 blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-40 right-20 w-60 h-60 bg-gradient-to-r from-green-400 to-blue-500 rounded-full opacity-10 blur-3xl animate-pulse"></div>
+      </div>
+
+      {/* Header */}
+      <header className="relative bg-white/80 backdrop-blur-lg border-b border-white/20 shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center">
+                <span className="text-white font-bold text-xl">HR</span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                  ระบบจัดการทรัพยากรมนุษย์
+                </h1>
+                <p className="text-sm text-gray-600">โซลูชั่นครบครัน สำหรับการจัดการ HR</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <Link href="/en" className="text-gray-600 hover:text-gray-900 transition-colors px-3 py-2 rounded-lg hover:bg-gray-100">
+                English
+              </Link>
+              {isLoggedIn ? (
+                <Link href="/th/dashboard" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                  แดชบอร์ด
+                </Link>
+              ) : (
+                <Link href="/th/login" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013 3v1" />
+                  </svg>
+                  เข้าสู่ระบบ
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="relative py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="mb-8">
+              <span className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 text-sm font-semibold rounded-full border border-blue-200">
+                <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                ระบบ HR ที่ทันสมัย
+              </span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 bg-clip-text text-transparent">
+                จัดการ HR
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                อย่างมืออาชีพ
+              </span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+              ระบบจัดการทรัพยากรมนุษย์ที่ครบครัน ทันสมัย และใช้งานง่าย 
+              สำหรับองค์กรทุกขนาด เพื่อเพิ่มประสิทธิภาพในการทำงาน
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href={isLoggedIn ? "/th/dashboard" : "/th/login"} className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-semibold rounded-2xl transition-all duration-200 transform hover:scale-105 shadow-xl hover:shadow-2xl">
+                <svg className="w-6 h-6 mr-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+                เริ่มต้นใช้งาน
+              </Link>
+              <Link href="#modules" className="group inline-flex items-center px-8 py-4 bg-white/80 hover:bg-white text-gray-700 hover:text-gray-900 font-semibold rounded-2xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl border border-gray-200">
+                <svg className="w-6 h-6 mr-3 group-hover:bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+                ดูโมดูลทั้งหมด
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="relative py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white/60 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/20 p-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-gray-900 font-semibold mb-1">{stat.name}</div>
+                  <div className="text-sm text-gray-600">{stat.description}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Modules Section */}
+      <section id="modules" className="relative py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
+                โมดูลระบบ HR
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              โซลูชั่นครบครันสำหรับการจัดการทุกด้านของทรัพยากรมนุษย์ในองค์กร
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {modules.map((module, index) => (
+              <Link key={index} href={module.href} className="group">
+                <div className="bg-white/60 backdrop-blur-lg rounded-3xl p-8 shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-2">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${module.gradient} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">
+                    {module.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-4">
+                    {module.description}
+                  </p>
+                  <div className="flex items-center text-indigo-600 font-semibold group-hover:translate-x-2 transition-transform">
+                    เข้าใช้งาน
+                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="relative py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-3xl p-12 text-center shadow-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              พร้อมเริ่มต้นแล้วหรือยัง?
+            </h2>
+            <p className="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
+              เข้าใช้งานระบบ HR ที่จะเปลี่ยนวิธีการทำงานของทีมคุณให้ดีขึ้น
+            </p>
+            <Link href={isLoggedIn ? "/th/dashboard" : "/th/login"} className="inline-flex items-center px-8 py-4 bg-white text-indigo-600 font-semibold rounded-2xl hover:bg-gray-50 transition-all duration-200 transform hover:scale-105 shadow-lg">
+              <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+              เริ่มใช้งานทันที
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="md:col-span-2">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-10 h-10 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">HR</span>
+                </div>
+                <span className="text-xl font-bold">ระบบจัดการ HR</span>
+              </div>
+              <p className="text-gray-400 mb-6 max-w-md">
+                โซลูชั่นการจัดการทรัพยากรมนุษย์ที่ครบครัน ทันสมัย และเหมาะสำหรับองค์กรทุกขนาด
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                  </svg>
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors">
+                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">โมดูลหลัก</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="/th/employees" className="hover:text-white transition-colors">จัดการพนักงาน</a></li>
+                <li><a href="/th/attendance" className="hover:text-white transition-colors">เข้างาน/ลงเวลา</a></li>
+                <li><a href="/th/payroll" className="hover:text-white transition-colors">จ่ายเงินเดือน</a></li>
+                <li><a href="/th/leave" className="hover:text-white transition-colors">ระบบลา</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">ติดต่อเรา</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>อีเมล: info@hr-system.com</li>
+                <li>โทร: 02-123-4567</li>
+                <li>ที่อยู่: กรุงเทพมหานคร</li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 HR Management System. สงวนสิทธิ์ทั้งหมด.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
